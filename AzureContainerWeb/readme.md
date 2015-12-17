@@ -2,7 +2,7 @@
 ARM Template using Custom Script Extension to instantiate some Windows Server Containers on Windows Server 2016 - Technical Preview 4
 
 
-[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fgithub.com%2FClaustn%2FAzureDeploy%2Fblob%2Fmaster%2FAzureContainerWeb%2Fazuredeploy.json) 
+[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FClaustn%2FAzureDeploy%2Fmaster%2FAzureContainerWeb%2Fazuredeploy.json) 
 
 <a href="http://armviz.io/#/?load=https://raw.githubusercontent.com/Claustn/AzureDeploy/master/AzureContainerWeb/azuredeploy.json" target="_blank">
     <img src="http://armviz.io/visualizebutton.png"/>
