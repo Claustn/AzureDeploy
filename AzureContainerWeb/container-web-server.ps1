@@ -67,6 +67,7 @@ Start-Container $container -Verbose
 #}
 #Write-Verbose -Message $ReturnMessage 
 
+Dir x:
 
 While (!($?)) {
 Invoke-Command -ContainerName $container.Name -RunAsAdministrator -ErrorAction Stop -ScriptBlock {
