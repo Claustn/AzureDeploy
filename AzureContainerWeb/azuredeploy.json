@@ -251,7 +251,7 @@
                         "typeHandlerVersion": "1.4",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                            "fileUris": [ "https://raw.githubusercontent.com/krnese/AzureDeploy/master/AzureContainerWeb/container-web-server.ps1" ],
+                          "fileUris": [ "https://raw.githubusercontent.com/Claustn/AzureDeploy/master/AzureContainerWeb/container-web-server.ps1" ],
                             "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ','Container-web-server.ps1 ', '-containername ', parameters('containername'))]"
                         }
                     }
