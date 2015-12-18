@@ -26,44 +26,65 @@ $container = New-Container -Name 'Temp' -ContainerImageName $image.Name -Contain
 Start-Container $container -Verbose
 
 # Install Web-Server within the container
-Try
-{
-    $ReturnMessage = Invoke-Command -ContainerName $container.Name -RunAsAdministrator -ErrorAction Stop -ScriptBlock {
-        try
-        {
-            Install-WindowsFeature -Name Web-Server -IncludeManagementTools
-            Write-Verbose -Message 'IIS Installed'
-        }
-		
-        catch
-        {
-            Write-Verbose -Message 'Failed to Install IIS'
-            Return $_
-        }
-    } -Verbose
-}
-Catch
-{
-    Write-Verbose -Message 'Invoke-Command Failed'
-    Write-Verbose -Message $ReturnMessage
-    Write-Error $_
-	
-    Write-Verbose -Message 'Trying again'
-    Invoke-Command -ContainerName $container.Name -RunAsAdministrator -ErrorAction Stop -ScriptBlock {
-        try
-        {
-            Install-WindowsFeature -Name Web-Server -IncludeManagementTools
-            Write-Verbose -Message 'IIS Installed'
-        }
-		
-        catch
-        {
-            Write-Verbose -Message 'Failed to Install IIS'
-            Return $_
-        }
-    } -Verbose
-}
+#Try
+#{
+#    $ReturnMessage = Invoke-Command -ContainerName $container.Name -RunAsAdministrator -ErrorAction Stop -ScriptBlock {
+#        try
+#        {
+#            Install-WindowsFeature -Name Web-Server -IncludeManagementTools
+#            Write-Verbose -Message 'IIS Installed'
+#            Return 'IIS Installed'
+#        }
+#		
+#        catch
+#        {
+#            Write-Verbose -Message 'Failed to Install IIS'
+#            Return $_
+#        }
+#    } -Verbose
+#}
+#Catch
+#{
+#    Write-Verbose -Message 'Invoke-Command Failed'
+#    Write-Verbose -Message $ReturnMessage
+#    Write-Error $_
+#	
+#    Write-Verbose -Message 'Trying again'
+#    Invoke-Command -ContainerName $container.Name -RunAsAdministrator -ErrorAction Stop -ScriptBlock {
+#        try
+#        {
+#            Install-WindowsFeature -Name Web-Server -IncludeManagementTools
+#            Write-Verbose -Message 'IIS Installed'
+#            Return 'IIS Installed'
+#        }
+#		
+#        catch
+#        {
+#            Write-Verbose -Message 'Failed to Install IIS'
+#            Return $_
+#        }
+#    } -Verbose
+#}
+#Write-Verbose -Message $ReturnMessage 
 
+
+While (!($?)) {
+Invoke-Command -ContainerName $container.Name -RunAsAdministrator -ErrorAction Stop -ScriptBlock {
+        try
+        {
+            Install-WindowsFeature -Name Web-Server -IncludeManagementTools
+            Write-Verbose -Message 'IIS Installed'
+            Return 'IIS Installed'
+        }
+		
+        catch
+        {
+            Write-Verbose -Message 'Failed to Install IIS'
+            Return $_
+        }
+    } -Verbose
+
+}
 
 # Stop the newly created Container
 
@@ -71,7 +92,7 @@ Stop-Container -Container $container -Verbose
 
 # Create new Container image for Web Server
 
-$newImage = New-ContainerImage -Container $container -Name 'Web' -Version 1.0.0.0 -Publisher knese -Verbose
+$newImage = New-ContainerImage -Container $container -Name 'Web1' -Version 1.0.0.0 -Publisher knese -Verbose
 
 # Create new Container based on Web Server container image
 
